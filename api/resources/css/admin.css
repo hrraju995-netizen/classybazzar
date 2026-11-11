@@ -1,0 +1,448 @@
+/* ============================================================
+   Classybazar Admin — Complete Light & Dark Theme (Filament 5)
+   ============================================================ */
+
+:root {
+    --cb-primary: #ea580c;
+    --cb-primary-hover: #c2410c;
+    --cb-primary-soft: #fff7ed;
+    --cb-primary-border: #fed7aa;
+    --cb-sidebar-from: #0f172a;
+    --cb-sidebar-to: #1e293b;
+    --cb-bg: #f3f5f9;
+    --cb-surface: #ffffff;
+    --cb-surface-alt: #f8fafc;
+    --cb-surface-hover: #fff7ed;
+    --cb-section-header-from: #fff7ed;
+    --cb-section-header-to: #ffffff;
+    --cb-text: #0f172a;
+    --cb-text-secondary: #334155;
+    --cb-muted: #64748b;
+    --cb-border: #e2e8f0;
+    --cb-input-bg: #ffffff;
+    --cb-input-border: #cbd5e1;
+    --cb-input-hover: #94a3b8;
+    --cb-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.04);
+    --cb-shadow-hover: 0 10px 26px rgba(15, 23, 42, 0.10);
+}
+
+html.dark {
+    --cb-primary: #f97316;
+    --cb-primary-hover: #ea580c;
+    --cb-primary-soft: rgba(249, 115, 22, 0.14);
+    --cb-primary-border: rgba(249, 115, 22, 0.35);
+    --cb-sidebar-from: #090d16;
+    --cb-sidebar-to: #111827;
+    --cb-bg: #0b0f19;
+    --cb-surface: #111827;
+    --cb-surface-alt: #1e293b;
+    --cb-surface-hover: rgba(249, 115, 22, 0.10);
+    --cb-section-header-from: rgba(249, 115, 22, 0.12);
+    --cb-section-header-to: rgba(17, 24, 39, 0.95);
+    --cb-text: #f8fafc;
+    --cb-text-secondary: #e2e8f0;
+    --cb-muted: #94a3b8;
+    --cb-border: #1f2937;
+    --cb-input-bg: #0f172a;
+    --cb-input-border: #334155;
+    --cb-input-hover: #475569;
+    --cb-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    --cb-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+/* ---- Page background -------------------------------------- */
+.fi-body,
+.fi-layout,
+.fi-main-ctn {
+    background-color: var(--cb-bg) !important;
+    color: var(--cb-text) !important;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.fi-main {
+    background: transparent !important;
+}
+
+/* ---- Welcome banner --------------------------------------- */
+.cb-banner {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.1rem;
+    padding: 1.75rem 2rem;
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 55%, #c2410c 100%);
+    box-shadow: 0 10px 30px rgba(234, 88, 12, 0.28);
+    color: #fff;
+}
+.cb-banner__circle {
+    position: absolute;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.12);
+}
+.cb-banner__circle--1 { width: 11rem; height: 11rem; top: -3rem; right: -3rem; }
+.cb-banner__circle--2 { width: 7rem; height: 7rem; bottom: -2.5rem; left: 38%; background: rgba(255, 255, 255, 0.08); }
+.cb-banner__body {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+.cb-banner__date { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; opacity: .9; margin-bottom: .25rem; }
+.cb-banner__title { font-size: 1.75rem; font-weight: 700; margin: 0; color: #fff !important; }
+.cb-banner__text { margin: .4rem 0 0; opacity: .95; font-size: .95rem; color: #fff; }
+.cb-banner__actions { display: flex; gap: .6rem; }
+.cb-btn {
+    display: inline-block;
+    padding: .6rem 1.15rem;
+    border-radius: .75rem;
+    font-size: .875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .2s;
+    white-space: nowrap;
+}
+.cb-btn--ghost { background: rgba(255, 255, 255, .2); color: #fff; border: 1px solid rgba(255, 255, 255, .45); }
+.cb-btn--ghost:hover { background: rgba(255, 255, 255, .32); }
+.cb-btn--solid { background: #fff; color: #ea580c; }
+.cb-btn--solid:hover { background: #fff7ed; }
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.fi-sidebar {
+    background: linear-gradient(180deg, var(--cb-sidebar-from) 0%, var(--cb-sidebar-to) 100%) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+    --tw-ring-color: transparent !important;
+}
+.fi-sidebar-header,
+.fi-sidebar-header-ctn {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, .08) !important;
+}
+.fi-sidebar-header *,
+.fi-sidebar-header .fi-logo,
+.fi-sidebar-header a { color: #fff !important; }
+.fi-sidebar-header button svg { color: #cbd5e1 !important; }
+
+.fi-sidebar-item-btn {
+    border-radius: .75rem !important;
+    transition: background .15s, transform .15s !important;
+}
+.fi-sidebar-item-btn .fi-sidebar-item-label { color: #e2e8f0 !important; font-weight: 500; }
+.fi-sidebar-item-btn .fi-sidebar-item-icon,
+.fi-sidebar-item-btn svg { color: #94a3b8 !important; }
+
+.fi-sidebar-item-btn:hover { background: rgba(255, 255, 255, .09) !important; transform: translateX(2px); }
+.fi-sidebar-item-btn:hover .fi-sidebar-item-label { color: #fff !important; }
+.fi-sidebar-item-btn:hover svg { color: #fff !important; }
+
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+    background: linear-gradient(135deg, #f97316, #ea580c) !important;
+    box-shadow: 0 6px 16px rgba(234, 88, 12, .4) !important;
+}
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-label,
+.fi-sidebar-item.fi-active > .fi-sidebar-item-btn svg { color: #fff !important; }
+
+.fi-sidebar-group-label,
+.fi-sidebar-group-btn .fi-sidebar-group-label {
+    color: #94a3b8 !important;
+    text-transform: uppercase;
+    font-size: .68rem !important;
+    letter-spacing: .09em;
+    font-weight: 700 !important;
+}
+.fi-sidebar-group-btn svg,
+.fi-sidebar-group-collapse-btn svg { color: #94a3b8 !important; }
+.fi-sidebar-group-btn:hover { background: rgba(255, 255, 255, .06) !important; }
+.fi-sidebar-item-grouped-border-part { background: #475569 !important; }
+
+.fi-sidebar-item-badge-ctn .fi-badge {
+    background: #fff !important;
+    color: #ea580c !important;
+    font-weight: 700 !important;
+}
+
+.fi-sidebar-nav::-webkit-scrollbar { width: 5px; }
+.fi-sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .18); border-radius: 999px; }
+
+/* ============================================================
+   TOPBAR & DROPDOWNS
+   ============================================================ */
+.fi-topbar {
+    background: var(--cb-surface) !important;
+    box-shadow: 0 1px 0 var(--cb-border) !important;
+    border-bottom: 1px solid var(--cb-border) !important;
+}
+.fi-topbar-ctn { background: var(--cb-surface) !important; }
+.fi-topbar .fi-logo,
+.fi-topbar a.fi-logo {
+    font-weight: 700;
+    color: var(--cb-text) !important;
+}
+
+.fi-dropdown-panel,
+.fi-modal-window {
+    background: var(--cb-surface) !important;
+    border: 1px solid var(--cb-border) !important;
+    border-radius: 1rem !important;
+    box-shadow: var(--cb-shadow-hover) !important;
+}
+
+/* Theme switcher buttons in user menu */
+.fi-theme-switcher {
+    background: var(--cb-surface-alt) !important;
+    border-radius: 0.65rem !important;
+    padding: 0.25rem !important;
+}
+.fi-theme-switcher-btn.fi-active {
+    background: var(--cb-primary) !important;
+    color: #ffffff !important;
+    border-radius: 0.5rem !important;
+}
+.fi-theme-switcher-btn.fi-active svg {
+    color: #ffffff !important;
+}
+
+/* ============================================================
+   PAGE HEADERS & BREADCRUMBS
+   ============================================================ */
+.fi-header-heading {
+    font-weight: 800 !important;
+    letter-spacing: -0.02em;
+    color: var(--cb-text) !important;
+}
+.fi-header-subheading {
+    color: var(--cb-muted) !important;
+}
+.fi-breadcrumbs-item-label {
+    color: var(--cb-muted) !important;
+    font-weight: 500;
+}
+
+/* ============================================================
+   CARDS, WIDGETS, SECTIONS & TABLES
+   ============================================================ */
+.fi-wi-stats-overview-stat,
+.fi-section,
+.fi-ta-ctn,
+.fi-wi-chart,
+.fi-wi-table,
+.fi-in-section {
+    background: var(--cb-surface) !important;
+    border-radius: 1rem !important;
+    border: 1px solid var(--cb-border) !important;
+    box-shadow: var(--cb-shadow) !important;
+    --tw-ring-color: transparent !important;
+}
+
+.fi-wi-stats-overview-stat {
+    transition: box-shadow .2s ease, transform .2s ease;
+}
+.fi-wi-stats-overview-stat:hover {
+    box-shadow: var(--cb-shadow-hover) !important;
+    transform: translateY(-2px);
+}
+.fi-wi-stats-overview-stat-value {
+    font-size: 1.75rem !important;
+    font-weight: 800 !important;
+    color: var(--cb-text) !important;
+}
+.fi-wi-stats-overview-stat-label {
+    color: var(--cb-muted) !important;
+    font-weight: 600;
+}
+
+/* ---- Tables ----------------------------------------------- */
+.fi-ta-header-ctn,
+.fi-ta-header-toolbar {
+    background: var(--cb-surface) !important;
+    border-bottom: 1px solid var(--cb-border) !important;
+}
+.fi-ta-header-cell {
+    background: var(--cb-surface-alt) !important;
+    text-transform: uppercase;
+    font-size: .72rem !important;
+    letter-spacing: .06em;
+    padding-top: 0.85rem !important;
+    padding-bottom: 0.85rem !important;
+}
+.fi-ta-header-cell,
+.fi-ta-header-cell * {
+    color: var(--cb-muted) !important;
+    font-weight: 700 !important;
+}
+.fi-ta-row {
+    border-bottom: 1px solid var(--cb-border) !important;
+    transition: background-color 0.15s ease;
+}
+.fi-ta-row:hover {
+    background: var(--cb-surface-hover) !important;
+}
+.fi-ta-text-item,
+.fi-ta-text,
+.fi-ta-cell {
+    color: var(--cb-text);
+}
+
+/* ---- Badges & Buttons ------------------------------------- */
+.fi-badge {
+    border-radius: 9999px !important;
+    font-weight: 600 !important;
+}
+.fi-btn.fi-color-primary:not(.fi-outlined) {
+    background: linear-gradient(135deg, #f97316, #ea580c) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 3px 10px rgba(234, 88, 12, .32) !important;
+    transition: all 0.2s ease !important;
+}
+.fi-btn.fi-color-primary:not(.fi-outlined):hover {
+    box-shadow: 0 6px 18px rgba(234, 88, 12, .48) !important;
+    transform: translateY(-1px);
+}
+
+/* ---- Tabs ------------------------------------------------- */
+.fi-tabs {
+    background: var(--cb-surface) !important;
+    border: 1px solid var(--cb-border) !important;
+    border-radius: 0.85rem !important;
+    padding: 0.3rem !important;
+}
+.fi-tabs-item {
+    border-radius: 0.65rem !important;
+    transition: all 0.15s ease;
+}
+.fi-tabs-item.fi-active {
+    background: var(--cb-primary-soft) !important;
+    border: 1px solid var(--cb-primary-border) !important;
+}
+.fi-tabs-item.fi-active .fi-tabs-item-label {
+    color: var(--cb-primary) !important;
+    font-weight: 700 !important;
+}
+
+/* ============================================================
+   FORMS & SECTIONS (All Menu Pages)
+   ============================================================ */
+.fi-section-header {
+    padding: 1rem 1.35rem !important;
+    background: linear-gradient(90deg, var(--cb-section-header-from) 0%, var(--cb-section-header-to) 75%) !important;
+    border-bottom: 1px solid var(--cb-border) !important;
+    border-radius: 1rem 1rem 0 0;
+}
+.fi-section-header-heading {
+    font-weight: 700 !important;
+    font-size: 1.02rem !important;
+    color: var(--cb-text) !important;
+}
+.fi-section-header-description {
+    color: var(--cb-muted) !important;
+    font-size: .82rem !important;
+}
+.fi-section-header-icon,
+.fi-section-header > .fi-icon,
+.fi-section-header svg {
+    color: var(--cb-primary) !important;
+}
+.fi-section-content {
+    padding: 1.35rem !important;
+}
+
+/* Labels & Helper text */
+.fi-fo-field-label-content,
+.fi-in-entry-wrp-label {
+    font-weight: 600 !important;
+    color: var(--cb-text-secondary) !important;
+    font-size: .85rem !important;
+}
+.fi-fo-field-wrp-hint,
+.fi-fo-field-wrp-helper-text {
+    color: var(--cb-muted) !important;
+    font-size: .76rem !important;
+}
+
+/* Inputs, Selects, Textareas */
+.fi-input-wrp {
+    background: var(--cb-input-bg) !important;
+    border-radius: .75rem !important;
+    box-shadow: 0 0 0 1px var(--cb-input-border) !important;
+    transition: box-shadow .15s ease, background-color .15s ease;
+}
+.fi-input-wrp:hover {
+    box-shadow: 0 0 0 1px var(--cb-input-hover) !important;
+}
+.fi-input-wrp:focus-within {
+    box-shadow: 0 0 0 2px var(--cb-primary), 0 0 0 5px rgba(234, 88, 12, .16) !important;
+}
+.fi-input,
+.fi-select-input,
+textarea.fi-input {
+    color: var(--cb-text) !important;
+}
+.fi-input-wrp-prefix,
+.fi-input-wrp-suffix {
+    background: var(--cb-surface-alt) !important;
+    color: var(--cb-muted) !important;
+    font-weight: 600;
+}
+.fi-input::placeholder,
+textarea::placeholder {
+    color: var(--cb-muted) !important;
+    opacity: 0.7;
+}
+
+/* Repeaters */
+.fi-fo-repeater-item {
+    border-radius: .9rem !important;
+    border: 1px solid var(--cb-border) !important;
+    background: var(--cb-surface-alt) !important;
+    box-shadow: none !important;
+    overflow: hidden;
+}
+.fi-fo-repeater-item-header {
+    background: var(--cb-surface) !important;
+    border-bottom: 1px solid var(--cb-border) !important;
+    padding: 0.7rem 1rem !important;
+}
+.fi-fo-repeater-item-header-label {
+    font-weight: 600;
+    color: var(--cb-text) !important;
+}
+
+/* File upload dropzone */
+.filepond--root { border-radius: .9rem; }
+.filepond--panel-root {
+    background: var(--cb-primary-soft) !important;
+    border: 2px dashed var(--cb-primary-border) !important;
+    border-radius: .9rem !important;
+}
+.filepond--drop-label { color: var(--cb-text-secondary) !important; font-weight: 500; }
+.filepond--label-action { color: var(--cb-primary) !important; font-weight: 700; }
+
+/* Toggles */
+.fi-toggle.fi-toggle-on { background-color: var(--cb-primary) !important; }
+
+/* Notifications */
+.fi-no-notification {
+    background: var(--cb-surface) !important;
+    border: 1px solid var(--cb-border) !important;
+    border-radius: .9rem !important;
+    box-shadow: var(--cb-shadow-hover) !important;
+}
+
+/* ============================================================
+   LOGIN PAGE
+   ============================================================ */
+.fi-simple-layout {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #7c2d12 130%) !important;
+}
+.fi-simple-main {
+    background: var(--cb-surface) !important;
+    border-radius: 1.25rem !important;
+    border: 1px solid var(--cb-border) !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, .35) !important;
+    --tw-ring-color: transparent !important;
+}

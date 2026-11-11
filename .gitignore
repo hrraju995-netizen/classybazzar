@@ -1,0 +1,8 @@
+node_modules/
+vendor/
+.next/
+.env
+.env.local
+database/database.sqlite
+logs/
+*.log
