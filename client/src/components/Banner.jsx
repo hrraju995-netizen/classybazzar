@@ -90,7 +90,7 @@ const Slide = ({ slide }) => {
       style={{ backgroundImage: `url(${slide.image})` }}
     >
       <div className='absolute inset-0' style={{ background: overlayGradient }} />
-      <div className={`relative z-10 flex flex-col max-w-2xl px-7 sm:px-12 lg:px-20 py-14 text-white w-full ${alignClasses}`}>
+      <div className={`relative z-10 flex flex-col max-w-2xl px-4 sm:px-12 lg:px-20 py-8 sm:py-14 text-white w-full ${alignClasses}`}>
         {slide.eyebrow && (
           <p
             className='uppercase tracking-[0.22em] text-xs sm:text-sm font-semibold mb-4'
@@ -100,7 +100,7 @@ const Slide = ({ slide }) => {
           </p>
         )}
         <h1
-          className='text-3xl sm:text-5xl lg:text-6xl leading-tight font-bold'
+          className='text-2xl sm:text-5xl lg:text-6xl leading-tight font-bold'
           style={{ color: slide.titleColor || '#ffffff' }}
         >
           {slide.title}

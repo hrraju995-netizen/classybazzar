@@ -204,13 +204,13 @@ const ProductDetailsSection = ({ product }) => {
   return (
     <div className="pt-8 pb-16 px-4 md:px-8 lg:px-16 text-black select-none font-poppins">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-        <div className="lg:col-span-7 flex gap-3 h-[320px] sm:h-[400px] md:h-[500px] w-full">
-          <div className="flex flex-col gap-2 overflow-y-auto pr-1 no-scrollbar max-h-full w-16 sm:w-20 md:w-24 shrink-0">
+        <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-3 w-full">
+          <div className="flex flex-row sm:flex-col gap-2 overflow-x-auto sm:overflow-y-auto pb-1 sm:pr-1 no-scrollbar w-full sm:w-16 md:w-20 lg:w-24 shrink-0 sm:max-h-[400px] md:max-h-[500px]">
             {productImages.map((img, index) => (
               <button
                 key={index}
                 onClick={() => setSelectedImage(index)}
-                className={`w-full aspect-square bg-white p-1 rounded-md border-2 transition-all flex items-center justify-center shrink-0 ${selectedImage === index ? 'border-[var(--color-primary)]' : 'border-gray-200 hover:border-gray-400 cursor-pointer'
+                className={`w-14 h-14 sm:w-full sm:aspect-square bg-white p-1 rounded-md border-2 transition-all flex items-center justify-center shrink-0 ${selectedImage === index ? 'border-[var(--color-primary)]' : 'border-gray-200 hover:border-gray-400 cursor-pointer'
                   }`}
               >
                 <div className="relative w-full h-full">
@@ -221,7 +221,7 @@ const ProductDetailsSection = ({ product }) => {
           </div>
           <div
             onClick={() => setIsOpenPopup(true)}
-            className="flex-1 bg-white border border-gray-100 rounded-lg flex items-center justify-center p-4 relative group h-full overflow-hidden shadow-sm cursor-zoom-in"
+            className="flex-1 bg-white border border-gray-100 rounded-lg flex items-center justify-center p-4 relative group h-[280px] sm:h-full overflow-hidden shadow-sm cursor-zoom-in"
           >
             <button
               onClick={(e) => {

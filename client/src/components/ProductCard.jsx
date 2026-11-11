@@ -10,10 +10,10 @@ export default function ProductCard({ product }) {
   if (!imageSrc) return null;
 
   return (
-    <div className="group w-full xs:max-w-[300px] mx-auto rounded-lg overflow-hidden font-poppins bg-[#F5F5F5] hover:shadow-xl sm:hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-gray-200 will-change-transform flex flex-col justify-between h-full">
+    <div className="group w-full mx-auto rounded-lg overflow-hidden font-poppins bg-[#F5F5F5] hover:shadow-xl sm:hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-gray-200 will-change-transform flex flex-col justify-between h-full">
 
       <Link href={`/products/${product.slug || product.id}`} className="block flex-1">
-        <div className="relative w-full h-[180px] xs:h-[210px] sm:h-[230px] md:h-[250px] flex items-center justify-center p-1 sm:p-2 rounded-t-md overflow-hidden bg-white/50">
+        <div className="relative w-full h-[160px] sm:h-[210px] md:h-[250px] flex items-center justify-center p-1 sm:p-2 rounded-t-md overflow-hidden bg-white/50">
 
           <div className="absolute top-4 right-2 flex flex-col items-center gap-2 z-10 md:translate-x-6 md:opacity-0 md:group-hover:translate-x-0 md:group-hover:opacity-100 transition-all duration-300 ease-in-out">
             <WishListButton product={product} />

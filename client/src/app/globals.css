@@ -9,6 +9,7 @@
 @theme {
   --font-poppins: var(--font-poppins), sans-serif;
   --font-inter: var(--font-inter), sans-serif;
+  --breakpoint-xs: 375px;
 }
 
 /* flash sales section */
@@ -55,4 +56,31 @@
 /* related items */
 .swiper-button-lock {
   display: flex !important;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Mobile safe area for bottom nav */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+/* Touch-friendly tap targets */
+@media (max-width: 640px) {
+  button, a {
+    min-height: 36px;
+  }
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
 }

@@ -61,7 +61,9 @@ export default async function RootLayout({ children }) {
         <Navbar settings={settings} />
         <MenuBar settings={settings} />
         <CartDrawer />
-        {children}
+        <main className="flex-1 pb-16 lg:pb-0">
+          {children}
+        </main>
         <MultiChatFAB settings={settings} />
         <Footer settings={settings} />
         <ToastContainer 

@@ -92,7 +92,7 @@ const Navbar = ({ settings }) => {
         </Link>
 
         {header.showSearch !== false && (
-          <div ref={dropdownRef} className='relative flex-1 max-w-2xl'>
+          <div ref={dropdownRef} className='relative flex-1 max-w-2xl hidden sm:block'>
             <form onSubmit={submit} className='relative'>
               <input
                 value={query}
@@ -121,6 +121,15 @@ const Navbar = ({ settings }) => {
         )}
 
         <div className='ml-auto flex items-center gap-3 md:gap-5'>
+          {header.showSearch !== false && (
+            <button
+              className='sm:hidden p-2'
+              aria-label='Search'
+              onClick={() => router.push('/products')}
+            >
+              <FiSearch size={22} />
+            </button>
+          )}
           <Link href='/wishlist' className='relative hidden sm:block' aria-label='Wishlist'>
             <FiHeart size={23} />
             <CountBadge count={wishlistCount} />
