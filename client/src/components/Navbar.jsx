@@ -98,11 +98,15 @@ const Navbar = ({ settings }) => {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 onFocus={() => query.trim().length > 1 && setOpen(true)}
-                placeholder='Search for products...'
-                className='w-full bg-gray-100 text-gray-900 text-sm pl-4 pr-12 py-3 rounded-xl outline-none border focus:ring-2'
+                placeholder='Search for product...'
+                className='w-full bg-[#f3f4f6] text-gray-900 text-sm pl-4 pr-12 py-3 rounded-md outline-none border border-transparent focus:border-gray-300 focus:bg-white transition-all'
               />
-              <button type='submit' className='absolute right-1.5 top-1/2 -translate-y-1/2 p-2 rounded-lg' style={{ backgroundColor: 'var(--color-button)', color: 'var(--color-button-text)' }}>
-                <FiSearch size={18} />
+              <button
+                type='submit'
+                className='absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded flex items-center justify-center transition hover:opacity-90'
+                style={{ backgroundColor: 'var(--color-button, #eb6e1b)', color: 'var(--color-button-text, #fff)' }}
+              >
+                <FiSearch size={16} />
               </button>
             </form>
             {open && (
@@ -140,14 +144,11 @@ const Navbar = ({ settings }) => {
           </button>
           <Link
             href={mounted && currentUser ? '/user/profile' : '/login'}
-            className='flex items-center gap-2 px-3 py-1.5 border rounded-full hover:bg-gray-50 transition'
+            className='relative p-1 text-gray-800 hover:text-[var(--color-primary)] transition-colors'
             aria-label='Account'
-            title={mounted && currentUser ? `Profile: ${currentUser.name}` : 'Sign In / Profile'}
+            title={mounted && currentUser ? `Profile: ${currentUser.name}` : 'Account'}
           >
-            <FiUser size={18} />
-            <span className='hidden md:inline text-xs font-semibold truncate max-w-[110px]'>
-              {mounted && currentUser ? currentUser.name.split(' ')[0] : 'Sign In'}
-            </span>
+            <FiUser size={24} />
           </Link>
         </div>
       </div>
