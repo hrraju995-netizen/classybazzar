@@ -157,7 +157,7 @@ const Navbar = ({ settings }) => {
         )}
 
         {/* Right: Actions (Wishlist, Cart, Profile) */}
-        <div className='flex items-center justify-end gap-4 sm:gap-5 md:gap-7 w-auto lg:w-72 shrink-0'>
+        <div className='flex items-center justify-end gap-4 sm:gap-5 md:gap-7 w-auto lg:w-72 shrink-0 mr-3 sm:mr-0'>
           <Link href='/wishlist' className='relative hidden sm:flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] transition-colors' aria-label='Wishlist'>
             <FiHeart size={24} className='stroke-[1.8]' />
             <CountBadge count={wishlistCount} />
