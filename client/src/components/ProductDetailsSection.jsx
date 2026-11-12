@@ -202,44 +202,31 @@ const ProductDetailsSection = ({ product }) => {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(variationMessage)}`;
 
   return (
-    <div className="pt-8 pb-16 px-4 md:px-8 lg:px-16 text-black select-none font-poppins">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-        <div className="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-3 w-full">
-          <div className="flex flex-row sm:flex-col gap-2 overflow-x-auto sm:overflow-y-auto pb-1 sm:pr-1 no-scrollbar w-full sm:w-16 md:w-20 lg:w-24 shrink-0 sm:max-h-[400px] md:max-h-[500px]">
-            {productImages.map((img, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedImage(index)}
-                className={`w-14 h-14 sm:w-full sm:aspect-square bg-white p-1 rounded-md border-2 transition-all flex items-center justify-center shrink-0 ${selectedImage === index ? 'border-[var(--color-primary)]' : 'border-gray-200 hover:border-gray-400 cursor-pointer'
-                  }`}
-              >
-                <div className="relative w-full h-full">
-                  <Image src={img} alt={`thumb-${index}`} fill className="object-contain" sizes="(max-width: 768px) 60px, 96px" />
-                </div>
-              </button>
-            ))}
-          </div>
+    <div className="pt-4 sm:pt-8 pb-12 sm:pb-16 px-4 md:px-8 lg:px-16 text-black select-none font-poppins">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-16 items-start">
+        <div className="lg:col-span-7 flex flex-col sm:flex-row gap-3 w-full">
+          {/* Main Product Image Container */}
           <div
             onClick={() => setIsOpenPopup(true)}
-            className="flex-1 bg-white border border-gray-100 rounded-lg flex items-center justify-center p-4 relative group h-[320px] sm:h-[480px] md:h-[520px] overflow-hidden shadow-sm cursor-zoom-in"
+            className="order-1 sm:order-2 flex-1 w-full aspect-square sm:aspect-auto sm:h-[480px] md:h-[520px] min-h-[300px] sm:min-h-0 bg-white border border-gray-100 rounded-lg flex items-center justify-center p-2 sm:p-4 relative group overflow-hidden shadow-sm cursor-zoom-in shrink-0 sm:shrink"
           >
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 handlePrevImage();
               }}
-              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-white/80 hover:bg-white text-gray-600 rounded-full flex items-center justify-center shadow-md transition-all cursor-pointer border border-gray-100 opacity-0 group-hover:opacity-100"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-white/80 hover:bg-white text-gray-600 rounded-full flex items-center justify-center shadow-md transition-all cursor-pointer border border-gray-100 opacity-80 sm:opacity-0 sm:group-hover:opacity-100"
             >
               <FiChevronLeft size={20} />
             </button>
-            <div className="relative w-full h-full">
+            <div className="absolute inset-2 sm:inset-4 flex items-center justify-center">
               <Image
                 src={productImages[selectedImage] || product?.thumbnail}
                 alt={product?.title || "Product Image"}
                 fill
                 className="object-contain p-2"
                 priority
-                sizes="(max-width: 1024px) 70vw, 45vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 70vw, 45vw"
               />
             </div>
             <button
@@ -247,10 +234,27 @@ const ProductDetailsSection = ({ product }) => {
                 e.stopPropagation();
                 handleNextImage();
               }}
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-white/80 hover:bg-white text-gray-600 rounded-full flex items-center justify-center shadow-md transition-all cursor-pointer border border-gray-100 opacity-0 group-hover:opacity-100"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-white/80 hover:bg-white text-gray-600 rounded-full flex items-center justify-center shadow-md transition-all cursor-pointer border border-gray-100 opacity-80 sm:opacity-0 sm:group-hover:opacity-100"
             >
               <FiChevronRight size={20} />
             </button>
+          </div>
+
+          {/* Thumbnails Row on mobile / Column on desktop */}
+          <div className="order-2 sm:order-1 flex flex-row sm:flex-col gap-2 overflow-x-auto sm:overflow-y-auto pb-1 sm:pr-1 no-scrollbar w-full sm:w-16 md:w-20 lg:w-24 shrink-0 sm:max-h-[480px] md:max-h-[520px]">
+            {productImages.map((img, index) => (
+              <button
+                key={index}
+                onClick={() => setSelectedImage(index)}
+                className={`w-16 h-16 sm:w-full sm:aspect-square bg-white p-1 rounded-md border-2 transition-all flex items-center justify-center shrink-0 ${
+                  selectedImage === index ? 'border-[var(--color-primary)]' : 'border-gray-200 hover:border-gray-400 cursor-pointer'
+                }`}
+              >
+                <div className="relative w-full h-full">
+                  <Image src={img} alt={`thumb-${index}`} fill className="object-contain" sizes="(max-width: 768px) 64px, 96px" />
+                </div>
+              </button>
+            ))}
           </div>
         </div>
         <div className="lg:col-span-5 flex flex-col justify-start gap-5">

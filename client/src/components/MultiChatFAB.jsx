@@ -52,8 +52,8 @@ const MultiChatFAB = ({ settings }) => {
   ].filter(Boolean);
 
   return (
-    <div className="fixed bottom-18 right-5 md:bottom-15 md:right-30 z-[9999] flex flex-col items-center">
-      <div className="flex flex-col-reverse items-center gap-3 mb-3 pointer-events-none">
+    <div className="fixed bottom-20 right-4 sm:bottom-20 sm:right-6 md:bottom-8 md:right-8 z-[9990] flex flex-col items-center">
+      <div className="flex flex-col-reverse items-center gap-2 sm:gap-3 mb-2.5 pointer-events-none">
         {actions.map((action, index) => {
           const delayClass = isOpen
             ? `transition-all duration-300 ease-out`
@@ -70,7 +70,7 @@ const MultiChatFAB = ({ settings }) => {
                 transitionDelay: isOpen ? `${index * 50}ms` : `${(actions.length - 1 - index) * 30}ms`,
               }}
               className={`
-                w-12 h-12 rounded-full text-white ${action.bg} shadow-lg 
+                w-11 h-11 sm:w-12 sm:h-12 rounded-full text-white ${action.bg} shadow-lg 
                 flex items-center justify-center cursor-pointer 
                 hover:scale-110 active:scale-95
                 ${delayClass}
@@ -90,7 +90,7 @@ const MultiChatFAB = ({ settings }) => {
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle Contact Menu"
         className={`
-          w-14 h-14 bg-[var(--color-button)] hover:bg-black text-white rounded-full 
+          w-12 h-12 sm:w-14 sm:h-14 bg-[var(--color-button)] hover:bg-black text-white rounded-full 
           shadow-xl hover:shadow-2xl transition-all duration-300 
           flex items-center justify-center cursor-pointer relative
           ${isOpen ? "rotate-90 bg-black" : "rotate-0"}
@@ -100,13 +100,13 @@ const MultiChatFAB = ({ settings }) => {
           className={`absolute transition-all duration-300 ${isOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-50"
             }`}
         >
-          <IoClose size={30} />
+          <IoClose size={26} />
         </span>
         <span
           className={`absolute transition-all duration-300 ${isOpen ? "opacity-0 rotate-90 scale-50" : "opacity-100 rotate-0 scale-100"
             }`}
         >
-          <BiCommentDetail size={28} />
+          <BiCommentDetail size={24} />
         </span>
       </button>
     </div>

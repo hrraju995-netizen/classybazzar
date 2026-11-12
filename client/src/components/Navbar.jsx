@@ -82,50 +82,64 @@ const Navbar = ({ settings }) => {
       className={`${header.sticky === false ? '' : 'sticky top-0'} w-full z-[99] border-b shadow-sm py-3 md:py-4`}
       style={{ backgroundColor: 'var(--color-header-bg)', color: 'var(--color-header-text)' }}
     >
-      <div className='container mx-auto px-4 md:px-0 flex items-center gap-4 md:gap-8'>
-        <button onClick={openDrawer} className='lg:hidden p-2' aria-label='Open categories'>
-          <FiMenu size={25} />
-        </button>
+      <div className='container mx-auto px-4 md:px-0 flex items-center justify-between'>
+        {/* Left: Mobile Drawer Trigger + Logo */}
+        <div className='flex items-center gap-2 sm:gap-3 w-auto lg:w-72 shrink-0'>
+          <button onClick={openDrawer} className='lg:hidden p-2 -ml-2 text-gray-800' aria-label='Open categories'>
+            <FiMenu size={24} />
+          </button>
 
-        <Link href='/' className='shrink-0'>
-          <Image src={logo} height={72} width={180} alt={settings?.site?.name || 'Store logo'} className='h-10 md:h-12 w-auto object-contain' priority />
-        </Link>
+          <Link href='/' className='shrink-0 flex items-center'>
+            <Image
+              src={logo}
+              height={72}
+              width={180}
+              alt={settings?.site?.name || 'Classy Bazar'}
+              className='h-8 sm:h-10 md:h-12 w-auto object-contain'
+              priority
+            />
+          </Link>
+        </div>
 
+        {/* Center: Search Bar (Centered on Desktop) */}
         {header.showSearch !== false && (
-          <div ref={dropdownRef} className='relative flex-1 max-w-xl xl:max-w-2xl hidden sm:block mx-2 md:mx-6'>
-            <form onSubmit={submit} className='relative w-full'>
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                onFocus={() => query.trim().length > 1 && setOpen(true)}
-                placeholder='Search for product...'
-                className='w-full bg-[#f5f5f5] text-gray-800 text-sm pl-5 pr-14 py-3 rounded-2xl outline-none border border-gray-200/80 focus:border-gray-300 focus:bg-white transition-all placeholder:text-gray-400 font-normal'
-              />
-              <button
-                type='submit'
-                className='absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center text-white transition hover:opacity-95 shadow-xs cursor-pointer'
-                style={{ backgroundColor: 'var(--color-button, #eb6e1b)', color: '#ffffff' }}
-                aria-label='Search'
-              >
-                <FiSearch size={18} className='stroke-[2.2]' />
-              </button>
-            </form>
-            {open && (
-              <div className='absolute left-0 right-0 top-full mt-2 bg-white text-gray-900 border border-gray-200 rounded-xl shadow-2xl z-[999] overflow-hidden'>
-                {loading && <p className='p-5 text-sm text-gray-500'>Searching...</p>}
-                {!loading && results.map((product) => (
-                  <Link key={product.id} href={`/products/${product.slug || product.id}`} onClick={() => setOpen(false)} className='flex items-center gap-3 p-3 hover:bg-gray-50 border-b last:border-0'>
-                    <Image src={product.thumbnail} width={48} height={48} alt={product.title} className='w-12 h-12 object-contain bg-gray-100 rounded-lg' />
-                    <span className='min-w-0'><strong className='text-sm block truncate'>{product.title}</strong><small style={{ color: 'var(--color-primary)' }}>BDT {product.price}</small></span>
-                  </Link>
-                ))}
-                {!loading && !results.length && <p className='p-5 text-sm text-gray-500'>No products found.</p>}
-              </div>
-            )}
+          <div className='flex-1 hidden sm:flex justify-center px-4'>
+            <div ref={dropdownRef} className='relative w-full max-w-lg lg:max-w-xl xl:max-w-2xl'>
+              <form onSubmit={submit} className='relative w-full'>
+                <input
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  onFocus={() => query.trim().length > 1 && setOpen(true)}
+                  placeholder='Search for product...'
+                  className='w-full bg-[#f5f5f5] text-gray-800 text-sm pl-5 pr-14 py-3 rounded-2xl outline-none border border-gray-200/80 focus:border-gray-300 focus:bg-white transition-all placeholder:text-gray-400 font-normal'
+                />
+                <button
+                  type='submit'
+                  className='absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center text-white transition hover:opacity-95 shadow-xs cursor-pointer'
+                  style={{ backgroundColor: 'var(--color-button, #eb6e1b)', color: '#ffffff' }}
+                  aria-label='Search'
+                >
+                  <FiSearch size={18} className='stroke-[2.2]' />
+                </button>
+              </form>
+              {open && (
+                <div className='absolute left-0 right-0 top-full mt-2 bg-white text-gray-900 border border-gray-200 rounded-xl shadow-2xl z-[999] overflow-hidden'>
+                  {loading && <p className='p-5 text-sm text-gray-500'>Searching...</p>}
+                  {!loading && results.map((product) => (
+                    <Link key={product.id} href={`/products/${product.slug || product.id}`} onClick={() => setOpen(false)} className='flex items-center gap-3 p-3 hover:bg-gray-50 border-b last:border-0'>
+                      <Image src={product.thumbnail} width={48} height={48} alt={product.title} className='w-12 h-12 object-contain bg-gray-100 rounded-lg' />
+                      <span className='min-w-0'><strong className='text-sm block truncate'>{product.title}</strong><small style={{ color: 'var(--color-primary)' }}>BDT {product.price}</small></span>
+                    </Link>
+                  ))}
+                  {!loading && !results.length && <p className='p-5 text-sm text-gray-500'>No products found.</p>}
+                </div>
+              )}
+            </div>
           </div>
         )}
 
-        <div className='ml-auto flex items-center gap-5 md:gap-7'>
+        {/* Right: Actions (Wishlist, Cart, Profile) */}
+        <div className='flex items-center justify-end gap-3 sm:gap-5 md:gap-7 w-auto lg:w-72 shrink-0'>
           {header.showSearch !== false && (
             <button
               className='sm:hidden p-2 text-gray-800'
