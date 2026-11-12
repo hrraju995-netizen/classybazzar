@@ -92,7 +92,7 @@ class OrderInfolist
                                 TextEntry::make('note')->label('Customer note')->placeholder('None'),
                             ]),
 
-                        Section::make('Delivery')
+                        Section::make('Delivery & Payment')
                             ->icon('heroicon-o-truck')
                             ->columns(2)
                             ->schema([
@@ -102,8 +102,10 @@ class OrderInfolist
                                 TextEntry::make('estimated_delivery_at')->label('Estimated delivery')->date('d M Y'),
                                 TextEntry::make('carrier')->placeholder('Not assigned'),
                                 TextEntry::make('tracking_code')->label('Consignment ID')->placeholder('Not assigned'),
-                                TextEntry::make('payment_method')->badge(),
-                                TextEntry::make('payment_status')->badge(),
+                                TextEntry::make('payment_method')->label('Payment Method')->badge()->formatStateUsing(fn ($state) => strtoupper((string) $state)),
+                                TextEntry::make('payment_status')->label('Payment Status')->badge(),
+                                TextEntry::make('payment_number')->label('Sender Number')->placeholder('-')->copyable(),
+                                TextEntry::make('transaction_id')->label('Transaction ID (TrxID)')->placeholder('-')->copyable(),
                             ]),
 
                         Section::make('Totals')

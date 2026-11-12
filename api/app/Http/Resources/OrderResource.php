@@ -27,6 +27,8 @@ class OrderResource extends JsonResource
             'statusKey' => $this->status,
             'paymentMethod' => $this->payment_method,
             'paymentStatus' => $this->payment_status,
+            'paymentNumber' => $this->payment_number,
+            'transactionId' => $this->transaction_id,
 
             'customer' => [
                 'name' => $this->customer_name,

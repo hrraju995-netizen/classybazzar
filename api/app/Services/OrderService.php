@@ -66,6 +66,8 @@ class OrderService
                 'coupon_code' => $priced['coupon']?->code,
                 'payment_method' => $data['payment_method'] ?? 'cod',
                 'payment_status' => 'pending',
+                'payment_number' => $data['payment_number'] ?? null,
+                'transaction_id' => $data['transaction_id'] ?? null,
                 'status' => 'pending',
                 'note' => $data['note'] ?? null,
                 'estimated_delivery_at' => now()->addDays(

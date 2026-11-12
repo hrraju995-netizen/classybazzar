@@ -50,8 +50,9 @@ class ManageSettings extends Page implements HasForms
         'footer' => ['label' => 'Footer & Social', 'icon' => 'heroicon-o-bars-3-bottom-left', 'sort' => 93],
         'contact' => ['label' => 'Contact & Live Chat', 'icon' => 'heroicon-o-chat-bubble-left-right', 'sort' => 94],
         'shipping' => ['label' => 'Shipping & Delivery', 'icon' => 'heroicon-o-truck', 'sort' => 95],
-        'tracking' => ['label' => 'Pixels & Tracking', 'icon' => 'heroicon-o-chart-bar', 'sort' => 96],
-        'couriers' => ['label' => 'Courier API', 'icon' => 'heroicon-o-paper-airplane', 'sort' => 97],
+        'payments' => ['label' => 'Payment Methods', 'icon' => 'heroicon-o-credit-card', 'sort' => 96],
+        'tracking' => ['label' => 'Pixels & Tracking', 'icon' => 'heroicon-o-chart-bar', 'sort' => 97],
+        'couriers' => ['label' => 'Courier API', 'icon' => 'heroicon-o-paper-airplane', 'sort' => 98],
     ];
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
@@ -165,6 +166,28 @@ class ManageSettings extends Page implements HasForms
             'shipping.inside_dhaka' => 7000,
             'shipping.outside_dhaka' => 13000,
             'shipping.free_above' => 0,
+
+            'payment.cod_enabled' => true,
+            'payment.cod_title' => 'Cash on Delivery',
+            'payment.cod_instructions' => 'Pay in cash when your order is delivered to your doorstep.',
+
+            'payment.bkash_enabled' => false,
+            'payment.bkash_title' => 'bKash',
+            'payment.bkash_number' => '',
+            'payment.bkash_type' => 'Personal',
+            'payment.bkash_instructions' => 'Please Send Money to our bKash Personal number, then enter your bKash mobile number and Transaction ID (TrxID) below.',
+
+            'payment.nagad_enabled' => false,
+            'payment.nagad_title' => 'Nagad',
+            'payment.nagad_number' => '',
+            'payment.nagad_type' => 'Personal',
+            'payment.nagad_instructions' => 'Please Send Money to our Nagad Personal number, then enter your Nagad mobile number and Transaction ID (TrxID) below.',
+
+            'payment.rocket_enabled' => false,
+            'payment.rocket_title' => 'Rocket',
+            'payment.rocket_number' => '',
+            'payment.rocket_type' => 'Personal',
+            'payment.rocket_instructions' => 'Please Send Money to our Rocket Personal number, then enter your Rocket mobile number and Transaction ID (TrxID) below.',
 
             'courier.steadfast.api_key' => '',
             'courier.steadfast.secret_key' => '',
@@ -316,6 +339,7 @@ class ManageSettings extends Page implements HasForms
             'footer' => $this->footerTab(),
             'contact' => $this->contactTab(),
             'shipping' => $this->shippingTab(),
+            'payments' => $this->paymentsTab(),
             'tracking' => $this->trackingTab(),
             'couriers' => $this->couriersTab(),
             default => $this->brandingTab(),
@@ -1141,6 +1165,67 @@ class ManageSettings extends Page implements HasForms
                     TextInput::make('shipping_outside_dhaka')->label('Outside Dhaka')->prefix('৳')->numeric()->required(),
                     TextInput::make('shipping_free_above')->label('Free delivery above')->prefix('৳')->numeric()
                         ->helperText('Set 0 to never give free delivery.'),
+                ]),
+        ]);
+    }
+
+    protected function paymentsTab(): Tab
+    {
+        return Tab::make('Payment Methods')->icon('heroicon-o-credit-card')->schema([
+            Section::make('Cash on Delivery (ক্যাশ অন ডেলিভারি)')
+                ->description('Allow customers to pay cash when products are delivered.')
+                ->icon('heroicon-o-banknotes')
+                ->columns(2)
+                ->schema([
+                    Toggle::make('payment_cod_enabled')->label('Enable Cash on Delivery')->default(true)->columnSpanFull(),
+                    TextInput::make('payment_cod_title')->label('Display Title')->default('Cash on Delivery'),
+                    Textarea::make('payment_cod_instructions')->label('Instructions / Note for Customers')->rows(2)->columnSpanFull(),
+                ]),
+
+            Section::make('bKash (বিকাশ)')
+                ->description('Accept manual payments via bKash personal or merchant account.')
+                ->icon('heroicon-o-device-phone-mobile')
+                ->columns(2)
+                ->schema([
+                    Toggle::make('payment_bkash_enabled')->label('Enable bKash')->default(false)->columnSpanFull(),
+                    TextInput::make('payment_bkash_title')->label('Display Title')->default('bKash'),
+                    TextInput::make('payment_bkash_number')->label('bKash Account Number')->placeholder('01XXXXXXXXX'),
+                    Select::make('payment_bkash_type')->label('Account Type')->options([
+                        'Personal' => 'Personal (Send Money)',
+                        'Merchant' => 'Merchant (Payment)',
+                        'Agent' => 'Agent (Cash In)',
+                    ])->default('Personal'),
+                    Textarea::make('payment_bkash_instructions')->label('Payment Instructions for Customers')->rows(2)->columnSpanFull(),
+                ]),
+
+            Section::make('Nagad (নগদ)')
+                ->description('Accept manual payments via Nagad personal or merchant account.')
+                ->icon('heroicon-o-device-phone-mobile')
+                ->columns(2)
+                ->schema([
+                    Toggle::make('payment_nagad_enabled')->label('Enable Nagad')->default(false)->columnSpanFull(),
+                    TextInput::make('payment_nagad_title')->label('Display Title')->default('Nagad'),
+                    TextInput::make('payment_nagad_number')->label('Nagad Account Number')->placeholder('01XXXXXXXXX'),
+                    Select::make('payment_nagad_type')->label('Account Type')->options([
+                        'Personal' => 'Personal (Send Money)',
+                        'Merchant' => 'Merchant (Payment)',
+                    ])->default('Personal'),
+                    Textarea::make('payment_nagad_instructions')->label('Payment Instructions for Customers')->rows(2)->columnSpanFull(),
+                ]),
+
+            Section::make('Rocket (রকেট)')
+                ->description('Accept manual payments via Rocket personal or merchant account.')
+                ->icon('heroicon-o-device-phone-mobile')
+                ->columns(2)
+                ->schema([
+                    Toggle::make('payment_rocket_enabled')->label('Enable Rocket')->default(false)->columnSpanFull(),
+                    TextInput::make('payment_rocket_title')->label('Display Title')->default('Rocket'),
+                    TextInput::make('payment_rocket_number')->label('Rocket Account Number')->placeholder('01XXXXXXXXX-X'),
+                    Select::make('payment_rocket_type')->label('Account Type')->options([
+                        'Personal' => 'Personal (Send Money)',
+                        'Merchant' => 'Merchant (Payment)',
+                    ])->default('Personal'),
+                    Textarea::make('payment_rocket_instructions')->label('Payment Instructions for Customers')->rows(2)->columnSpanFull(),
                 ]),
         ]);
     }

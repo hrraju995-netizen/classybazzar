@@ -29,6 +29,7 @@ class Order extends Model
         'coupon_code',
         'payment_method',
         'payment_status',
+        'payment_number',
         'transaction_id',
         'status',
         'carrier',

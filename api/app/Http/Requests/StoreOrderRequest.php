@@ -20,7 +20,9 @@ class StoreOrderRequest extends FormRequest
             'email' => ['nullable', 'email', 'max:180'],
             'address' => ['required', 'string', 'max:500'],
             'shipping_area' => ['required', Rule::in(['inside', 'outside'])],
-            'payment_method' => ['nullable', Rule::in(['cod', 'bkash', 'nagad', 'sslcommerz'])],
+            'payment_method' => ['nullable', 'string', 'max:50'],
+            'payment_number' => ['nullable', 'string', 'max:50'],
+            'transaction_id' => ['nullable', 'string', 'max:100'],
             'coupon_code' => ['nullable', 'string', 'max:40'],
             'note' => ['nullable', 'string', 'max:1000'],
 

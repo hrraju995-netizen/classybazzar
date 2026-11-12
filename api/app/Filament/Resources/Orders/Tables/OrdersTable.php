@@ -93,6 +93,7 @@ class OrdersTable
                     ->label('Payment')
                     ->badge()
                     ->formatStateUsing(fn ($state) => strtoupper((string) $state))
+                    ->description(fn (Order $record) => $record->transaction_id ? "Trx: {$record->transaction_id}" : ($record->payment_number ? "From: {$record->payment_number}" : null))
                     ->toggleable(),
 
                 TextColumn::make('courier')

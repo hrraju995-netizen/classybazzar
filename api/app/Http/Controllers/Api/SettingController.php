@@ -99,7 +99,34 @@ class SettingController extends Controller
                 'freeAbove' => Money::toTaka((int) Setting::get('shipping.free_above', 0)),
             ],
 
-            'paymentMethods' => Setting::get('payment.methods', ['cod']),
+            'paymentMethods' => [
+                'cod' => [
+                    'enabled' => (bool) Setting::get('payment.cod_enabled', true),
+                    'title' => Setting::get('payment.cod_title', 'Cash on Delivery'),
+                    'instructions' => Setting::get('payment.cod_instructions', 'Pay with cash upon delivery.'),
+                ],
+                'bkash' => [
+                    'enabled' => (bool) Setting::get('payment.bkash_enabled', false),
+                    'title' => Setting::get('payment.bkash_title', 'bKash'),
+                    'number' => Setting::get('payment.bkash_number', ''),
+                    'type' => Setting::get('payment.bkash_type', 'Personal'),
+                    'instructions' => Setting::get('payment.bkash_instructions', 'Please Send Money to our bKash Personal number, then enter your bKash mobile number and Transaction ID (TrxID) below.'),
+                ],
+                'nagad' => [
+                    'enabled' => (bool) Setting::get('payment.nagad_enabled', false),
+                    'title' => Setting::get('payment.nagad_title', 'Nagad'),
+                    'number' => Setting::get('payment.nagad_number', ''),
+                    'type' => Setting::get('payment.nagad_type', 'Personal'),
+                    'instructions' => Setting::get('payment.nagad_instructions', 'Please Send Money to our Nagad Personal number, then enter your Nagad mobile number and Transaction ID (TrxID) below.'),
+                ],
+                'rocket' => [
+                    'enabled' => (bool) Setting::get('payment.rocket_enabled', false),
+                    'title' => Setting::get('payment.rocket_title', 'Rocket'),
+                    'number' => Setting::get('payment.rocket_number', ''),
+                    'type' => Setting::get('payment.rocket_type', 'Personal'),
+                    'instructions' => Setting::get('payment.rocket_instructions', 'Please Send Money to our Rocket Personal number, then enter your Rocket mobile number and Transaction ID (TrxID) below.'),
+                ],
+            ],
 
             'tracking' => array_filter([
                 'fbPixelId' => Setting::get('tracking.fb_pixel_id'),
