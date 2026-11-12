@@ -13,15 +13,15 @@ const SubBanner = ({ title, pageName }) => {
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-black tracking-wide font-poppins capitalize leading-tight">
           {title}
         </h1>
-        <div className="flex items-center justify-center flex-wrap gap-1 sm:gap-2 text-xs sm:text-xs md:text-sm font-medium">
-          <Link href="/" className="text-gray-600 hover:text-[#DB4444] transition-colors duration-200">
+        <nav aria-label="Breadcrumb" className="flex items-center justify-center flex-wrap gap-1.5 text-xs md:text-sm font-medium leading-none">
+          <Link href="/" className="inline-flex items-center text-gray-600 hover:text-[#DB4444] transition-colors duration-200">
             Home
           </Link>
-          <MdOutlineKeyboardArrowRight size={16} className="text-gray-400 sm:size-[16px]" />
-          <span className="text-black capitalize font-semibold">
+          <MdOutlineKeyboardArrowRight size={16} className="text-gray-400 shrink-0" />
+          <span className="inline-flex items-center text-black capitalize font-semibold">
             {pageName || title}
           </span>
-        </div>
+        </nav>
       </div>
     </section>
   );

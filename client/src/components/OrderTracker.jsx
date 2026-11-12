@@ -10,6 +10,7 @@ import {
   Download,
   MapPin,
   PackageSearch,
+  Phone,
   Printer,
   Search,
   Truck,
@@ -53,21 +54,20 @@ export default function OrderTracker({ initialOrderNumber = '' }) {
   return (
     <main className="min-h-[70vh] bg-gray-50 px-4 py-8 font-poppins md:py-16">
       <div className="container mx-auto max-w-xl">
-        {/* Back to Shop + Live Tracking buttons */}
-        <div className="mb-6 flex flex-wrap items-center gap-3">
+        {/* Back to Shop + Live Tracking buttons (strictly inline on one row) */}
+        <div className="mb-6 flex items-center justify-between gap-2">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-[var(--color-primary)] border border-gray-200 bg-white rounded-full px-5 py-2.5 shadow-xs transition-colors"
+            className="inline-flex items-center gap-1.5 text-gray-600 hover:text-[var(--color-primary)] border border-gray-200 bg-white rounded-xl px-3.5 py-2 sm:px-5 sm:py-2.5 shadow-xs transition-colors whitespace-nowrap shrink-0"
           >
-            <ArrowLeft size={16} />
-            <span className="uppercase text-xs font-bold tracking-wider">Back to Shop</span>
+            <ArrowLeft size={15} />
+            <span className="uppercase text-[11px] sm:text-xs font-bold tracking-wider">Back to Shop</span>
           </Link>
           <div
-            className="inline-flex items-center gap-2 text-sm font-semibold text-white rounded-full px-5 py-2.5 shadow-sm"
-            style={{ backgroundColor: 'var(--color-button, #eb6e1b)' }}
+            className="inline-flex items-center gap-1.5 text-white bg-[#0f172a] rounded-xl px-3.5 py-2 sm:px-5 sm:py-2.5 shadow-sm whitespace-nowrap shrink-0"
           >
-            <Truck size={16} />
-            <span className="text-xs font-bold tracking-wide">Live Tracking</span>
+            <Truck size={15} style={{ color: 'var(--color-button, #eb6e1b)' }} />
+            <span className="text-[11px] sm:text-xs font-bold tracking-wide">Live Tracking</span>
           </div>
         </div>
 
@@ -76,24 +76,34 @@ export default function OrderTracker({ initialOrderNumber = '' }) {
           <div className="text-center mb-7">
             <PackageSearch className="mx-auto mb-3 text-[var(--color-primary)]" size={38} />
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-950">
-              Track Your <span style={{ color: 'var(--color-primary, #eb6e1b)' }}>Order</span>
+              Track Your <span className="underline decoration-2 underline-offset-4" style={{ color: 'var(--color-primary, #eb6e1b)' }}>Order</span>
             </h1>
             <p className="mt-2 text-sm text-gray-500 max-w-xs mx-auto">
-              Enter your order serial key below. Try testing with{' '}
-              <strong className="underline">CB-12345</strong> or{' '}
-              <strong className="underline">CB-67890</strong>.
+              Enter your order ID and checkout phone number below to check live status.
             </p>
           </div>
 
-          <form onSubmit={handleSearch} className="space-y-4">
+          <form onSubmit={handleSearch} className="space-y-3.5">
             <div className="relative">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
               <input
                 type="text"
                 value={orderNumber}
                 onChange={(event) => setOrderNumber(event.target.value)}
-                placeholder="Enter Order Identification ID.."
+                placeholder="Enter Order ID (e.g. CB-XXXXXXXX)"
                 autoComplete="off"
+                className="h-12 w-full rounded-xl border border-gray-200 bg-gray-50 pl-11 pr-4 text-sm outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-orange-100 transition-all"
+              />
+            </div>
+
+            <div className="relative">
+              <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+              <input
+                type="tel"
+                value={phone}
+                onChange={(event) => setPhone(event.target.value)}
+                placeholder="Checkout Phone Number (01XXXXXXXXX)"
+                autoComplete="tel"
                 className="h-12 w-full rounded-xl border border-gray-200 bg-gray-50 pl-11 pr-4 text-sm outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-orange-100 transition-all"
               />
             </div>
@@ -101,7 +111,7 @@ export default function OrderTracker({ initialOrderNumber = '' }) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full h-12 flex items-center justify-center gap-2 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 uppercase tracking-wider shadow-sm"
+              className="w-full h-12 flex items-center justify-center gap-2 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 uppercase tracking-wider shadow-sm cursor-pointer"
               style={{ backgroundColor: 'var(--color-button, #eb6e1b)' }}
             >
               <Search size={17} />
@@ -117,8 +127,8 @@ export default function OrderTracker({ initialOrderNumber = '' }) {
 
           {!orderData && !error && (
             <div className="mt-8 text-center text-gray-300">
-              <PackageSearch className="mx-auto mb-3" size={48} />
-              <p className="text-sm text-gray-400">
+              <PackageSearch className="mx-auto mb-3" size={44} />
+              <p className="text-xs sm:text-sm text-gray-400">
                 Awaiting input telemetry data. Fill the tracker form above to visualize real-time package logistics.
               </p>
             </div>

@@ -74,11 +74,8 @@
   }
 }
 
-/* Touch-friendly tap targets */
+/* Mobile container padding */
 @media (max-width: 640px) {
-  button, a {
-    min-height: 36px;
-  }
   .container {
     padding-left: 12px;
     padding-right: 12px;
