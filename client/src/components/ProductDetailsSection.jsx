@@ -221,7 +221,7 @@ const ProductDetailsSection = ({ product }) => {
           </div>
           <div
             onClick={() => setIsOpenPopup(true)}
-            className="flex-1 bg-white border border-gray-100 rounded-lg flex items-center justify-center p-4 relative group h-[280px] sm:h-full overflow-hidden shadow-sm cursor-zoom-in"
+            className="flex-1 bg-white border border-gray-100 rounded-lg flex items-center justify-center p-4 relative group h-[320px] sm:h-[480px] md:h-[520px] overflow-hidden shadow-sm cursor-zoom-in"
           >
             <button
               onClick={(e) => {
