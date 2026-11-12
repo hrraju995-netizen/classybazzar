@@ -3,19 +3,19 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { 
-  FiChevronDown, 
-  FiChevronRight, 
-  FiGrid, 
-  FiHeart, 
-  FiHelpCircle, 
-  FiHome, 
-  FiInfo, 
-  FiMenu, 
-  FiPackage, 
-  FiTruck, 
-  FiUser, 
-  FiX 
+import {
+  FiChevronDown,
+  FiChevronRight,
+  FiGrid,
+  FiHeart,
+  FiHelpCircle,
+  FiHome,
+  FiInfo,
+  FiMenu,
+  FiPackage,
+  FiTruck,
+  FiUser,
+  FiX
 } from 'react-icons/fi';
 import { useDrawerStore } from '@/store/useDrawerStore';
 import { useWishlistStore } from '@/store/useWishlistStore';
@@ -65,11 +65,22 @@ const MenuBar = ({ settings }) => {
     getCategories()
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
-          setCategories(data.slice(0, 12));
+          setCategories(data);
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
+
+  useEffect(() => {
+    if (isDrawerOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isDrawerOpen]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -111,9 +122,8 @@ const MenuBar = ({ settings }) => {
             {/* Dropdown for non-home pages */}
             {!isHomePage && (
               <div
-                className={`absolute top-full left-0 w-full bg-white border border-t-0 border-gray-200 rounded-b-md shadow-xl z-50 transition-all ${
-                  dropdownOpen ? 'block' : 'hidden group-hover:block'
-                }`}
+                className={`absolute top-full left-0 w-full bg-white border border-t-0 border-gray-200 rounded-b-md shadow-xl z-50 transition-all ${dropdownOpen ? 'block' : 'hidden group-hover:block'
+                  }`}
               >
                 <CategorySidebar onSelect={() => setDropdownOpen(false)} />
               </div>
@@ -138,18 +148,16 @@ const MenuBar = ({ settings }) => {
 
       {/* Mobile Side Menu Drawer (Matches Image 1 & 5) */}
       <div
-        className={`fixed inset-0 bg-black/60 backdrop-blur-[2px] z-[99999] transition-opacity duration-300 lg:hidden ${
-          isDrawerOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`fixed inset-0 bg-black/60 backdrop-blur-[2px] z-[99999] transition-opacity duration-300 lg:hidden ${isDrawerOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
       >
         <aside
           ref={drawerRef}
-          className={`fixed top-0 left-0 bottom-0 w-[84vw] max-w-[320px] sm:max-w-[340px] bg-[#F7F8FA] shadow-2xl transition-transform duration-300 ease-out overflow-y-auto p-4 flex flex-col gap-3.5 pb-24 ${
-            isDrawerOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
+          className={`fixed top-0 left-0 bottom-0 h-dvh w-[84vw] max-w-[320px] sm:max-w-[340px] bg-[#F7F8FA] shadow-2xl transition-transform duration-300 ease-out overflow-y-auto overscroll-contain touch-pan-y p-4 flex flex-col gap-3.5 pb-10 ${isDrawerOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}
         >
           {/* Top Header Card + Close Button (Matches Image 1 & 5) */}
-          <div className='flex items-center gap-2.5'>
+          <div className='flex items-center gap-2.5 shrink-0'>
             <div
               className='flex-1 rounded-2xl p-4 flex items-center gap-3.5 text-white shadow-sm'
               style={{ backgroundColor: 'var(--color-primary, #eb6e1b)' }}
@@ -181,7 +189,7 @@ const MenuBar = ({ settings }) => {
           </div>
 
           {/* Categories Rounded Card (Matches Image 1 & 5) */}
-          <div className='bg-white rounded-2xl shadow-xs border border-gray-100 overflow-hidden divide-y divide-gray-50'>
+          <div className='bg-white rounded-2xl shadow-xs border border-gray-100 overflow-hidden divide-y divide-gray-50 shrink-0'>
             {categories.map((cat, index) => (
               <Link
                 key={cat.slug || index}
@@ -206,7 +214,7 @@ const MenuBar = ({ settings }) => {
           </div>
 
           {/* Quick Links Section (Matches Image 1 & 5) */}
-          <div className='flex flex-col gap-1.5 pt-1'>
+          <div className='flex flex-col gap-1.5 pt-1 shrink-0'>
             <span className='text-[11px] font-semibold text-gray-400 uppercase tracking-wider px-2 font-mono'>
               QUICK LINKS
             </span>
