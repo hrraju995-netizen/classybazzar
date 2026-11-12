@@ -15,6 +15,7 @@ import { useWishlistStore } from '@/store/useWishlistStore';
 const Navbar = ({ settings }) => {
   const router = useRouter();
   const dropdownRef = useRef(null);
+  const mobileDropdownRef = useRef(null);
   const cart = useCartStore((state) => state.cart);
   const openCart = useCartStore((state) => state.openCart);
   const wishlist = useWishlistStore((state) => state.wishlist);
@@ -64,7 +65,10 @@ const Navbar = ({ settings }) => {
 
   useEffect(() => {
     const close = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) setOpen(false);
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target) &&
+          mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target)) {
+        setOpen(false);
+      }
     };
     document.addEventListener('mousedown', close);
     return () => document.removeEventListener('mousedown', close);
@@ -85,8 +89,8 @@ const Navbar = ({ settings }) => {
       <div className='container mx-auto px-4 md:px-0 flex items-center justify-between'>
         {/* Left: Mobile Drawer Trigger + Logo on desktop */}
         <div className='flex items-center gap-2 sm:gap-3 w-auto lg:w-72 shrink-0'>
-          <button onClick={openDrawer} className='lg:hidden p-2 -ml-2 text-gray-800' aria-label='Open categories'>
-            <FiMenu size={25} />
+          <button onClick={openDrawer} className='lg:hidden p-1.5 text-gray-800' aria-label='Open categories'>
+            <FiMenu size={24} />
           </button>
 
           <Link href='/' className='shrink-0 hidden sm:flex items-center'>
@@ -101,8 +105,8 @@ const Navbar = ({ settings }) => {
           </Link>
         </div>
 
-        {/* Mobile Centered Logo (Matches Image 1, 2, 4, 6, 7) */}
-        <div className='sm:hidden flex-1 flex justify-center items-center'>
+        {/* Mobile Centered Logo */}
+        <div className='sm:hidden flex-1 flex justify-center items-center px-2'>
           <Link href='/' className='flex items-center'>
             <Image
               src={logo}
@@ -153,13 +157,13 @@ const Navbar = ({ settings }) => {
         )}
 
         {/* Right: Actions (Wishlist, Cart, Profile) */}
-        <div className='flex items-center justify-end gap-3 sm:gap-5 md:gap-7 w-auto lg:w-72 shrink-0'>
+        <div className='flex items-center justify-end gap-4 sm:gap-5 md:gap-7 w-auto lg:w-72 shrink-0'>
           <Link href='/wishlist' className='relative hidden sm:flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] transition-colors' aria-label='Wishlist'>
             <FiHeart size={24} className='stroke-[1.8]' />
             <CountBadge count={wishlistCount} />
           </Link>
-          <button onClick={openCart} className='relative flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] transition-colors cursor-pointer p-1' aria-label='Shopping cart'>
-            <FiShoppingCart size={24} className='stroke-[1.8]' />
+          <button onClick={openCart} className='relative flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] transition-colors cursor-pointer' aria-label='Shopping cart'>
+            <FiShoppingCart size={22} className='stroke-[1.8]' />
             <CountBadge count={cartCount} />
           </button>
           <Link
@@ -173,9 +177,9 @@ const Navbar = ({ settings }) => {
         </div>
       </div>
 
-      {/* Row 2 on Mobile: Full-Width Search Bar (Matches Image 1, 2, 4, 6, 7) */}
+      {/* Row 2 on Mobile: Full-Width Search Bar */}
       {header.showSearch !== false && (
-        <div ref={dropdownRef} className='sm:hidden px-4 pt-2.5 pb-0.5 relative'>
+        <div ref={mobileDropdownRef} className='sm:hidden px-4 pt-2.5 pb-0.5 relative'>
           <form onSubmit={submit} className='relative w-full'>
             <input
               value={query}

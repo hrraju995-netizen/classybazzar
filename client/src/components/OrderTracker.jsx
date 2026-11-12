@@ -51,72 +51,90 @@ export default function OrderTracker({ initialOrderNumber = '' }) {
   };
 
   return (
-    <main className="min-h-[70vh] bg-gray-50 px-4 py-10 font-poppins md:py-16">
-      <div className="container mx-auto max-w-5xl">
-        <Link href="/products" className="mb-7 inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-[var(--color-primary)]">
-          <ArrowLeft size={17} />
-          Back to shop
-        </Link>
+    <main className="min-h-[70vh] bg-gray-50 px-4 py-8 font-poppins md:py-16">
+      <div className="container mx-auto max-w-xl">
+        {/* Back to Shop + Live Tracking buttons */}
+        <div className="mb-6 flex flex-wrap items-center gap-3">
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-[var(--color-primary)] border border-gray-200 bg-white rounded-full px-5 py-2.5 shadow-xs transition-colors"
+          >
+            <ArrowLeft size={16} />
+            <span className="uppercase text-xs font-bold tracking-wider">Back to Shop</span>
+          </Link>
+          <div
+            className="inline-flex items-center gap-2 text-sm font-semibold text-white rounded-full px-5 py-2.5 shadow-sm"
+            style={{ backgroundColor: 'var(--color-button, #eb6e1b)' }}
+          >
+            <Truck size={16} />
+            <span className="text-xs font-bold tracking-wide">Live Tracking</span>
+          </div>
+        </div>
 
-        <section className="border border-gray-200 bg-white px-5 py-7 md:px-8">
-          <div className="mx-auto max-w-2xl">
-            <div className="mb-6 text-center">
-              <PackageSearch className="mx-auto mb-3 text-[var(--color-primary)]" size={34} />
-              <h1 className="text-2xl font-bold text-gray-950 md:text-3xl">Track your order</h1>
-              <p className="mt-2 text-sm text-gray-500">Enter the order ID and checkout phone number.</p>
+        {/* Main Tracker Card */}
+        <section className="bg-white rounded-2xl shadow-sm border border-gray-100 px-5 py-8 sm:px-8 sm:py-10">
+          <div className="text-center mb-7">
+            <PackageSearch className="mx-auto mb-3 text-[var(--color-primary)]" size={38} />
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-950">
+              Track Your <span style={{ color: 'var(--color-primary, #eb6e1b)' }}>Order</span>
+            </h1>
+            <p className="mt-2 text-sm text-gray-500 max-w-xs mx-auto">
+              Enter your order serial key below. Try testing with{' '}
+              <strong className="underline">CB-12345</strong> or{' '}
+              <strong className="underline">CB-67890</strong>.
+            </p>
+          </div>
+
+          <form onSubmit={handleSearch} className="space-y-4">
+            <div className="relative">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+              <input
+                type="text"
+                value={orderNumber}
+                onChange={(event) => setOrderNumber(event.target.value)}
+                placeholder="Enter Order Identification ID.."
+                autoComplete="off"
+                className="h-12 w-full rounded-xl border border-gray-200 bg-gray-50 pl-11 pr-4 text-sm outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-orange-100 transition-all"
+              />
             </div>
 
-            <form onSubmit={handleSearch} className="grid gap-3 md:grid-cols-[1fr_1fr_auto] md:items-end">
-              <label className="block">
-                <span className="mb-1.5 block text-xs font-semibold text-gray-700">Order ID</span>
-                <input
-                  type="text"
-                  value={orderNumber}
-                  onChange={(event) => setOrderNumber(event.target.value)}
-                  placeholder="CB-XXXXXXXX"
-                  autoComplete="off"
-                  className="h-11 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-orange-100"
-                />
-              </label>
-              <label className="block">
-                <span className="mb-1.5 block text-xs font-semibold text-gray-700">Phone number</span>
-                <input
-                  type="tel"
-                  value={phone}
-                  onChange={(event) => setPhone(event.target.value)}
-                  placeholder="01XXXXXXXXX"
-                  autoComplete="tel"
-                  className="h-11 w-full rounded-md border border-gray-300 px-3 text-sm outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-orange-100"
-                />
-              </label>
-              <button
-                type="submit"
-                disabled={loading}
-                className="flex h-11 items-center justify-center gap-2 rounded-md bg-[var(--color-button)] px-6 text-sm font-semibold text-white hover:bg-black disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                <Search size={17} />
-                {loading ? 'Checking...' : 'Track'}
-              </button>
-            </form>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full h-12 flex items-center justify-center gap-2 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 uppercase tracking-wider shadow-sm"
+              style={{ backgroundColor: 'var(--color-button, #eb6e1b)' }}
+            >
+              <Search size={17} />
+              {loading ? 'Searching...' : 'SEARCH'}
+            </button>
+          </form>
 
-            {error && (
-              <p role="alert" className="mt-4 border-l-4 border-red-500 bg-red-50 px-4 py-3 text-sm text-red-700">
-                {error}
+          {error && (
+            <p role="alert" className="mt-5 border-l-4 border-red-500 bg-red-50 px-4 py-3 text-sm text-red-700 rounded-r-lg">
+              {error}
+            </p>
+          )}
+
+          {!orderData && !error && (
+            <div className="mt-8 text-center text-gray-300">
+              <PackageSearch className="mx-auto mb-3" size={48} />
+              <p className="text-sm text-gray-400">
+                Awaiting input telemetry data. Fill the tracker form above to visualize real-time package logistics.
               </p>
-            )}
-          </div>
+            </div>
+          )}
         </section>
 
         {orderData && (
           <div className="mt-6 space-y-6">
-            <section className="grid gap-px overflow-hidden border border-gray-200 bg-gray-200 sm:grid-cols-2 lg:grid-cols-4">
+            <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               <OrderFact icon={PackageSearch} label="Order ID" value={orderData.id} />
               <OrderFact icon={Truck} label="Courier" value={orderData.carrier} />
               <OrderFact icon={CalendarDays} label="Estimated delivery" value={orderData.eta} />
               <OrderFact icon={MapPin} label="Current status" value={orderData.status} highlight />
             </section>
 
-            <section className="border border-gray-200 bg-white px-5 py-7 md:px-8">
+            <section className="bg-white rounded-2xl shadow-sm border border-gray-100 px-5 py-7 sm:px-8">
               <div className="mb-7 flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 pb-5">
                 <div>
                   <h2 className="text-lg font-bold text-gray-950">Order progress</h2>
@@ -173,7 +191,7 @@ export default function OrderTracker({ initialOrderNumber = '' }) {
 
 function OrderFact({ icon: Icon, label, value, highlight = false }) {
   return (
-    <div className="min-w-0 bg-white p-5">
+    <div className="min-w-0 bg-white rounded-xl border border-gray-100 shadow-xs p-4">
       <div className="mb-2 flex items-center gap-2 text-gray-500">
         <Icon size={16} />
         <span className="text-xs font-medium">{label}</span>

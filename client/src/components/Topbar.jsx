@@ -16,12 +16,13 @@ const Topbar = ({ settings }) => {
       className='w-full px-3 sm:px-4 py-2 font-poppins text-xs md:text-sm bg-black text-white'
     >
       <div className='container mx-auto relative flex items-center justify-center text-center'>
-        <div className='flex items-center justify-center text-center gap-1.5 leading-tight text-[11px] sm:text-xs md:text-sm px-1 max-w-full'>
-          <span className='text-gray-200 truncate sm:overflow-visible'>{topbarText}</span>
-          <Link href={linkUrl} className='font-semibold underline text-white hover:text-orange-400 whitespace-nowrap shrink-0 transition-colors'>
+        <p className='text-center leading-tight text-[11px] sm:text-xs md:text-sm px-1 max-w-full'>
+          <span className='text-gray-200'>{topbarText}</span>
+          {' '}
+          <Link href={linkUrl} className='font-semibold underline text-white hover:text-orange-400 transition-colors'>
             {linkLabel}
           </Link>
-        </div>
+        </p>
 
         <div className='hidden sm:flex items-center gap-1 absolute right-0 text-xs font-normal text-gray-200 cursor-pointer select-none hover:text-white'>
           <span>English</span>
