@@ -262,7 +262,7 @@ const CheckoutForm = ({ settings: initialSettings }) => {
         </div>
 
         {/* Shipping Area */}
-        <div className="space-y-3 bg-gray-50 p-4 rounded-lg border border-gray-200">
+        <div className="space-y-3 bg-white p-4 rounded-xl border border-gray-200 shadow-xs">
           <p className="text-sm font-semibold text-gray-700">Select Shipping Area:</p>
           <div className="flex flex-col gap-2">
             <label className="flex items-center gap-2 text-sm cursor-pointer">
@@ -277,7 +277,7 @@ const CheckoutForm = ({ settings: initialSettings }) => {
         </div>
 
         {/* Payment Methods */}
-        <div className="space-y-3 bg-gray-50 p-4 rounded-lg border border-gray-200">
+        <div className="space-y-3 bg-white p-4 rounded-xl border border-gray-200 shadow-xs">
           <p className="text-sm font-semibold text-gray-700">Payment Method / পেমেন্ট মাধ্যম:</p>
           <div className="flex flex-col gap-2.5">
             {enabledPaymentKeys.length === 0 ? (
@@ -424,7 +424,7 @@ const CheckoutForm = ({ settings: initialSettings }) => {
         <button
           type="submit"
           disabled={isSubmitting || cart.length === 0}
-          className="bg-[var(--color-button)] text-white py-3 w-full rounded-md hover:bg-black transition-all font-semibold cursor-pointer flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-60"
+          className="bg-[var(--color-button)] text-white py-3.5 w-full rounded-xl hover:bg-black transition-all font-semibold cursor-pointer flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-60 shadow-sm text-base"
         >
           {isSubmitting ? <Spinner size="sm" color="current" /> : <GiShoppingBag className="text-xl" />}
           <span>{isSubmitting ? 'Placing order...' : 'Order now'}</span>

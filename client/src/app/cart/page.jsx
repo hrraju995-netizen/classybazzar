@@ -158,7 +158,7 @@ const CartPage = () => {
                   Return To Shop
                 </Button>
               </div>
-              <div className="w-full lg:max-w-[450px] order-1 lg:order-2 border-2 border-black rounded-md p-5 md:p-6 bg-white shadow-sm">
+              <div className="w-full lg:max-w-[450px] order-1 lg:order-2 border-2 border-black rounded-xl p-5 md:p-6 bg-white shadow-sm">
                 <h2 className="text-lg md:text-xl font-bold mb-4">Cart Total</h2>
                 <div className="flex justify-between border-b pb-3 mb-3 text-sm">
                   <span className="text-gray-600">Subtotal:</span>
@@ -197,7 +197,7 @@ const CartPage = () => {
 
                 <div>
                   <Link href={"/checkout"} className="block w-full">
-                    <button className="w-full flex items-center justify-center gap-2 bg-[var(--color-button)] text-white py-3 rounded-md font-medium hover:bg-black transition-colors duration-300 cursor-pointer shadow-sm">
+                    <button className="w-full flex items-center justify-center gap-2 bg-[var(--color-button)] text-white py-3 rounded-xl font-semibold hover:bg-black transition-colors duration-300 cursor-pointer shadow-sm py-3.5">
                       <IoBagCheckOutline size={19} />
                       <span>Proceed to checkout</span>
                     </button>

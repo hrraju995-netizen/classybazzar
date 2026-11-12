@@ -46,7 +46,7 @@ const Banner = ({ slides = [], autoplay = true, arrows = true, delay = 4500, emb
     : demoSlides;
 
   const slider = (
-    <div className='group relative min-w-0 overflow-hidden custom-swiper rounded-lg md:rounded-xl shadow-sm'>
+    <div className='group relative min-w-0 overflow-hidden custom-swiper rounded-none sm:rounded-xl shadow-sm w-full'>
       <Swiper
         slidesPerView={1}
         loop={items.length > 1}
@@ -87,7 +87,7 @@ const Banner = ({ slides = [], autoplay = true, arrows = true, delay = 4500, emb
   if (embedded) return slider;
 
   return (
-    <section className='w-full px-4 md:px-0 pt-3'>
+    <section className='w-full px-0 sm:px-4 md:px-0 pt-0 sm:pt-3'>
       <div className='container mx-auto'>{slider}</div>
     </section>
   );
@@ -99,8 +99,9 @@ const Slide = ({ slide, embedded }) => {
 
   return (
     <div
-      className={`relative w-full bg-cover bg-center flex items-center ${embedded ? 'h-[320px] sm:h-[380px] lg:h-[445px]' : 'min-h-[320px] sm:min-h-[380px] lg:min-h-[445px]'
-        }`}
+      className={`relative w-full bg-cover bg-center flex items-center ${
+        embedded ? 'h-[230px] xs:h-[270px] sm:h-[350px] lg:h-[445px]' : 'min-h-[230px] xs:min-h-[270px] sm:min-h-[350px] lg:min-h-[445px]'
+      }`}
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       {/* Dark gradient overlay matching Image 1 */}
@@ -111,34 +112,34 @@ const Slide = ({ slide, embedded }) => {
         }}
       />
 
-      <div className='relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-14 py-8 sm:py-12 text-white w-full max-w-xl font-poppins'>
+      <div className='relative z-10 flex flex-col justify-center px-4 sm:px-12 lg:px-14 py-5 sm:py-12 text-white w-full max-w-xl font-poppins'>
         {slide.eyebrow && (
-          <div className='flex items-center gap-2 mb-3 text-xs sm:text-sm font-medium tracking-wide text-white/90'>
-            {isApple && <FaApple size={20} className='shrink-0' />}
+          <div className='flex items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3 text-[11px] sm:text-sm font-medium tracking-wide text-white/90'>
+            {isApple && <FaApple size={18} className='shrink-0' />}
             <span>{slide.eyebrow}</span>
           </div>
         )}
 
-        <h1 className='text-2xl sm:text-4xl lg:text-[44px] leading-tight font-bold text-white tracking-tight max-w-md'>
+        <h1 className='text-xl sm:text-3xl lg:text-[44px] leading-tight font-bold text-white tracking-tight max-w-md'>
           {slide.title}
         </h1>
 
         {slide.description && (
-          <p className='mt-3 text-xs sm:text-sm text-white/80 max-w-sm line-clamp-2'>
+          <p className='mt-2 sm:mt-3 text-[11px] sm:text-sm text-white/80 max-w-sm line-clamp-2'>
             {slide.description}
           </p>
         )}
 
         {/* Sleek Underlined Shop Now button matching Image 1 */}
-        <div className='mt-5'>
+        <div className='mt-3.5 sm:mt-5'>
           <Link
             href={slide.buttonUrl || '/products'}
-            className='inline-flex items-center gap-2 text-white font-medium group transition-colors'
+            className='inline-flex items-center gap-1.5 sm:gap-2 text-white font-medium group transition-colors'
           >
-            <span className='border-b-2 border-white pb-0.5 group-hover:border-orange-400 group-hover:text-orange-400 text-sm sm:text-base'>
+            <span className='border-b-2 border-white pb-0.5 group-hover:border-orange-400 group-hover:text-orange-400 text-xs sm:text-base'>
               {slide.buttonLabel || 'Shop Now'}
             </span>
-            <FiArrowRight size={17} className='group-hover:translate-x-1 transition-transform' />
+            <FiArrowRight size={15} className='group-hover:translate-x-1 transition-transform' />
           </Link>
         </div>
       </div>

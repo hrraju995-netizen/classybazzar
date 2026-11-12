@@ -13,12 +13,12 @@ const Topbar = ({ settings }) => {
 
   return (
     <section
-      className='w-full px-4 py-2.5 font-poppins text-xs md:text-sm bg-black text-white'
+      className='w-full px-3 sm:px-4 py-2 font-poppins text-xs md:text-sm bg-black text-white'
     >
       <div className='container mx-auto relative flex items-center justify-center text-center'>
-        <div className='flex items-center justify-center flex-wrap gap-1 leading-5'>
-          <span className='text-gray-200'>{topbarText}</span>
-          <Link href={linkUrl} className='font-semibold underline text-white hover:text-orange-400 ml-1 transition-colors'>
+        <div className='flex items-center justify-center text-center gap-1.5 leading-tight text-[11px] sm:text-xs md:text-sm px-1 max-w-full'>
+          <span className='text-gray-200 truncate sm:overflow-visible'>{topbarText}</span>
+          <Link href={linkUrl} className='font-semibold underline text-white hover:text-orange-400 whitespace-nowrap shrink-0 transition-colors'>
             {linkLabel}
           </Link>
         </div>

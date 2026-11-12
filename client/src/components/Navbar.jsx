@@ -79,23 +79,37 @@ const Navbar = ({ settings }) => {
 
   return (
     <nav
-      className={`${header.sticky === false ? '' : 'sticky top-0'} w-full z-[99] border-b shadow-sm py-3 md:py-4`}
+      className={`${header.sticky === false ? '' : 'sticky top-0'} w-full z-[99] border-b shadow-sm py-2.5 md:py-4`}
       style={{ backgroundColor: 'var(--color-header-bg)', color: 'var(--color-header-text)' }}
     >
       <div className='container mx-auto px-4 md:px-0 flex items-center justify-between'>
-        {/* Left: Mobile Drawer Trigger + Logo */}
+        {/* Left: Mobile Drawer Trigger + Logo on desktop */}
         <div className='flex items-center gap-2 sm:gap-3 w-auto lg:w-72 shrink-0'>
           <button onClick={openDrawer} className='lg:hidden p-2 -ml-2 text-gray-800' aria-label='Open categories'>
-            <FiMenu size={24} />
+            <FiMenu size={25} />
           </button>
 
-          <Link href='/' className='shrink-0 flex items-center'>
+          <Link href='/' className='shrink-0 hidden sm:flex items-center'>
             <Image
               src={logo}
               height={72}
               width={180}
               alt={settings?.site?.name || 'Classy Bazar'}
-              className='h-8 sm:h-10 md:h-12 w-auto object-contain'
+              className='h-10 md:h-12 w-auto object-contain'
+              priority
+            />
+          </Link>
+        </div>
+
+        {/* Mobile Centered Logo (Matches Image 1, 2, 4, 6, 7) */}
+        <div className='sm:hidden flex-1 flex justify-center items-center'>
+          <Link href='/' className='flex items-center'>
+            <Image
+              src={logo}
+              height={64}
+              width={160}
+              alt={settings?.site?.name || 'Classy Bazar'}
+              className='h-9 w-auto object-contain'
               priority
             />
           </Link>
@@ -140,26 +154,17 @@ const Navbar = ({ settings }) => {
 
         {/* Right: Actions (Wishlist, Cart, Profile) */}
         <div className='flex items-center justify-end gap-3 sm:gap-5 md:gap-7 w-auto lg:w-72 shrink-0'>
-          {header.showSearch !== false && (
-            <button
-              className='sm:hidden p-2 text-gray-800'
-              aria-label='Search'
-              onClick={() => router.push('/products')}
-            >
-              <FiSearch size={22} />
-            </button>
-          )}
           <Link href='/wishlist' className='relative hidden sm:flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] transition-colors' aria-label='Wishlist'>
             <FiHeart size={24} className='stroke-[1.8]' />
             <CountBadge count={wishlistCount} />
           </Link>
-          <button onClick={openCart} className='relative flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] transition-colors cursor-pointer' aria-label='Shopping cart'>
+          <button onClick={openCart} className='relative flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] transition-colors cursor-pointer p-1' aria-label='Shopping cart'>
             <FiShoppingCart size={24} className='stroke-[1.8]' />
             <CountBadge count={cartCount} />
           </button>
           <Link
             href={mounted && currentUser ? '/user/profile' : '/login'}
-            className='w-10 h-10 rounded-full border border-gray-300 hover:border-gray-900 flex items-center justify-center text-gray-700 hover:text-black transition-all'
+            className='hidden sm:flex w-10 h-10 rounded-full border border-gray-300 hover:border-gray-900 items-center justify-center text-gray-700 hover:text-black transition-all'
             aria-label='Account'
             title={mounted && currentUser ? `Profile: ${currentUser.name}` : 'Sign In / Profile'}
           >
@@ -167,6 +172,41 @@ const Navbar = ({ settings }) => {
           </Link>
         </div>
       </div>
+
+      {/* Row 2 on Mobile: Full-Width Search Bar (Matches Image 1, 2, 4, 6, 7) */}
+      {header.showSearch !== false && (
+        <div ref={dropdownRef} className='sm:hidden px-4 pt-2.5 pb-0.5 relative'>
+          <form onSubmit={submit} className='relative w-full'>
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              onFocus={() => query.trim().length > 1 && setOpen(true)}
+              placeholder='Search for product...'
+              className='w-full bg-[#f5f5f5] text-gray-800 text-sm pl-4 pr-12 py-2.5 rounded-2xl outline-none border border-gray-200/80 focus:border-gray-300 focus:bg-white transition-all placeholder:text-gray-400 font-normal'
+            />
+            <button
+              type='submit'
+              className='absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center text-white transition hover:opacity-95 shadow-xs cursor-pointer'
+              style={{ backgroundColor: 'var(--color-button, #eb6e1b)', color: '#ffffff' }}
+              aria-label='Search'
+            >
+              <FiSearch size={16} className='stroke-[2.2]' />
+            </button>
+          </form>
+          {open && (
+            <div className='absolute left-4 right-4 top-full mt-1.5 bg-white text-gray-900 border border-gray-200 rounded-xl shadow-2xl z-[999] overflow-hidden'>
+              {loading && <p className='p-4 text-sm text-gray-500'>Searching...</p>}
+              {!loading && results.map((product) => (
+                <Link key={product.id} href={`/products/${product.slug || product.id}`} onClick={() => setOpen(false)} className='flex items-center gap-3 p-3 hover:bg-gray-50 border-b last:border-0'>
+                  <Image src={product.thumbnail} width={44} height={44} alt={product.title} className='w-11 h-11 object-contain bg-gray-100 rounded-lg' />
+                  <span className='min-w-0'><strong className='text-sm block truncate'>{product.title}</strong><small style={{ color: 'var(--color-primary)' }}>BDT {product.price}</small></span>
+                </Link>
+              ))}
+              {!loading && !results.length && <p className='p-4 text-sm text-gray-500'>No products found.</p>}
+            </div>
+          )}
+        </div>
+      )}
     </nav>
   );
 };

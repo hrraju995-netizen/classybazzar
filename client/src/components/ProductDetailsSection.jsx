@@ -204,11 +204,28 @@ const ProductDetailsSection = ({ product }) => {
   return (
     <div className="pt-4 sm:pt-8 pb-12 sm:pb-16 px-4 md:px-8 lg:px-16 text-black select-none font-poppins">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-16 items-start">
-        <div className="lg:col-span-7 flex flex-col sm:flex-row gap-3 w-full">
-          {/* Main Product Image Container */}
+        <div className="lg:col-span-7 flex flex-row gap-2.5 sm:gap-4 items-start w-full">
+          {/* Thumbnails Column on the Left (Matches Image 2) */}
+          <div className="flex flex-col gap-2 shrink-0 w-14 sm:w-16 md:w-20 max-h-[380px] sm:max-h-[480px] md:max-h-[520px] overflow-y-auto no-scrollbar pb-1">
+            {productImages.map((img, index) => (
+              <button
+                key={index}
+                onClick={() => setSelectedImage(index)}
+                className={`w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white p-1 rounded-xl border-2 transition-all flex items-center justify-center shrink-0 cursor-pointer ${
+                  selectedImage === index ? 'border-[var(--color-primary,#eb6e1b)]' : 'border-gray-200 hover:border-gray-400'
+                }`}
+              >
+                <div className="relative w-full h-full">
+                  <Image src={img} alt={`thumb-${index}`} fill className="object-contain" sizes="80px" />
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Main Product Image Large Rounded Card on the Right (Matches Image 2) */}
           <div
             onClick={() => setIsOpenPopup(true)}
-            className="order-1 sm:order-2 flex-1 w-full aspect-square sm:aspect-auto sm:h-[480px] md:h-[520px] min-h-[300px] sm:min-h-0 bg-white border border-gray-100 rounded-lg flex items-center justify-center p-2 sm:p-4 relative group overflow-hidden shadow-sm cursor-zoom-in shrink-0 sm:shrink"
+            className="flex-1 aspect-square bg-white border border-gray-100 rounded-2xl relative group overflow-hidden shadow-xs cursor-zoom-in flex items-center justify-center shrink-0 sm:shrink"
           >
             <button
               onClick={(e) => {
@@ -219,14 +236,14 @@ const ProductDetailsSection = ({ product }) => {
             >
               <FiChevronLeft size={20} />
             </button>
-            <div className="absolute inset-2 sm:inset-4 flex items-center justify-center">
+            <div className="absolute inset-3 sm:inset-4 flex items-center justify-center">
               <Image
-                src={productImages[selectedImage] || product?.thumbnail}
+                src={productImages[selectedImage] || product?.thumbnail || '/navbarLogo.png'}
                 alt={product?.title || "Product Image"}
                 fill
                 className="object-contain p-2"
                 priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 70vw, 45vw"
+                sizes="(max-width: 768px) 80vw, 45vw"
               />
             </div>
             <button
@@ -238,23 +255,6 @@ const ProductDetailsSection = ({ product }) => {
             >
               <FiChevronRight size={20} />
             </button>
-          </div>
-
-          {/* Thumbnails Row on mobile / Column on desktop */}
-          <div className="order-2 sm:order-1 flex flex-row sm:flex-col gap-2 overflow-x-auto sm:overflow-y-auto pb-1 sm:pr-1 no-scrollbar w-full sm:w-16 md:w-20 lg:w-24 shrink-0 sm:max-h-[480px] md:max-h-[520px]">
-            {productImages.map((img, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedImage(index)}
-                className={`w-16 h-16 sm:w-full sm:aspect-square bg-white p-1 rounded-md border-2 transition-all flex items-center justify-center shrink-0 ${
-                  selectedImage === index ? 'border-[var(--color-primary)]' : 'border-gray-200 hover:border-gray-400 cursor-pointer'
-                }`}
-              >
-                <div className="relative w-full h-full">
-                  <Image src={img} alt={`thumb-${index}`} fill className="object-contain" sizes="(max-width: 768px) 64px, 96px" />
-                </div>
-              </button>
-            ))}
           </div>
         </div>
         <div className="lg:col-span-5 flex flex-col justify-start gap-5">
