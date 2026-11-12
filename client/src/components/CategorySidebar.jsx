@@ -91,3 +91,4 @@ export default function CategorySidebar({ limit = 11, onSelect }) {
     </ul>
   );
 }
+

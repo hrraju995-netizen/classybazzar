@@ -6,29 +6,27 @@ import { apiFetch, buildQuery } from "./client";
  */
 export function getProducts(params = {}, options = {}) {
   return apiFetch(`/products${buildQuery(params)}`, {
-    // Tagged so the admin panel can flush this cache the moment a product
-    // changes, instead of the shop owner waiting out the revalidate window.
-    next: { revalidate: 60, tags: ["products"] },
+    cache: "no-store",
     ...options,
   });
 }
 
 export function getProduct(productKey, options = {}) {
   return apiFetch(`/products/${productKey}`, {
-    next: { revalidate: 60, tags: ["products", `product-${productKey}`] },
+    cache: "no-store",
     ...options,
   });
 }
 
 export function getRelatedProducts(productKey, limit = 8) {
   return apiFetch(`/products/${productKey}/related${buildQuery({ limit })}`, {
-    next: { revalidate: 60, tags: ["products"] },
+    cache: "no-store",
   });
 }
 
 export function getCategories() {
   return apiFetch("/products/categories", {
-    next: { revalidate: 300, tags: ["categories"] },
+    cache: "no-store",
   });
 }
 

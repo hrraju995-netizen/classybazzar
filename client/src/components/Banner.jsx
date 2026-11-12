@@ -41,8 +41,8 @@ const demoSlides = [
 
 const Banner = ({ slides = [], autoplay = true, arrows = true, delay = 4500, embedded = false }) => {
   // Use demoSlides if slides is empty, or ensure the classic slide is active
-  const items = slides.length && slides.some(s => s.image && !s.image.includes('banner-1.jpg')) 
-    ? slides 
+  const items = slides.length && slides.some(s => s.image && !s.image.includes('banner-1.jpg'))
+    ? slides
     : demoSlides;
 
   const slider = (
@@ -99,17 +99,16 @@ const Slide = ({ slide, embedded }) => {
 
   return (
     <div
-      className={`relative w-full bg-cover bg-center flex items-center ${
-        embedded ? 'h-[320px] sm:h-[380px] lg:h-[445px]' : 'min-h-[320px] sm:min-h-[380px] lg:min-h-[445px]'
-      }`}
+      className={`relative w-full bg-cover bg-center flex items-center ${embedded ? 'h-[320px] sm:h-[380px] lg:h-[445px]' : 'min-h-[320px] sm:min-h-[380px] lg:min-h-[445px]'
+        }`}
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       {/* Dark gradient overlay matching Image 1 */}
-      <div 
-        className='absolute inset-0' 
-        style={{ 
-          background: 'linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.1) 100%)' 
-        }} 
+      <div
+        className='absolute inset-0'
+        style={{
+          background: 'linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.1) 100%)'
+        }}
       />
 
       <div className='relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-14 py-8 sm:py-12 text-white w-full max-w-xl font-poppins'>

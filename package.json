@@ -1,0 +1,9 @@
+{
+  "name": "classybazar",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix client run start"
+  }
+}
