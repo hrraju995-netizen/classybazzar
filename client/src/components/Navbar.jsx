@@ -92,25 +92,26 @@ const Navbar = ({ settings }) => {
         </Link>
 
         {header.showSearch !== false && (
-          <div ref={dropdownRef} className='relative flex-1 max-w-2xl hidden sm:block'>
-            <form onSubmit={submit} className='relative'>
+          <div ref={dropdownRef} className='relative flex-1 max-w-xl xl:max-w-2xl hidden sm:block mx-2 md:mx-6'>
+            <form onSubmit={submit} className='relative w-full'>
               <input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 onFocus={() => query.trim().length > 1 && setOpen(true)}
                 placeholder='Search for product...'
-                className='w-full bg-[#f3f4f6] text-gray-900 text-sm pl-4 pr-12 py-3 rounded-md outline-none border border-transparent focus:border-gray-300 focus:bg-white transition-all'
+                className='w-full bg-[#f5f5f5] text-gray-800 text-sm pl-5 pr-14 py-3 rounded-2xl outline-none border border-gray-200/80 focus:border-gray-300 focus:bg-white transition-all placeholder:text-gray-400 font-normal'
               />
               <button
                 type='submit'
-                className='absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded flex items-center justify-center transition hover:opacity-90'
-                style={{ backgroundColor: 'var(--color-button, #eb6e1b)', color: 'var(--color-button-text, #fff)' }}
+                className='absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center text-white transition hover:opacity-95 shadow-xs cursor-pointer'
+                style={{ backgroundColor: 'var(--color-button, #eb6e1b)', color: '#ffffff' }}
+                aria-label='Search'
               >
-                <FiSearch size={16} />
+                <FiSearch size={18} className='stroke-[2.2]' />
               </button>
             </form>
             {open && (
-              <div className='absolute left-0 right-0 top-full mt-2 bg-white text-gray-900 border rounded-xl shadow-2xl z-[999] overflow-hidden'>
+              <div className='absolute left-0 right-0 top-full mt-2 bg-white text-gray-900 border border-gray-200 rounded-xl shadow-2xl z-[999] overflow-hidden'>
                 {loading && <p className='p-5 text-sm text-gray-500'>Searching...</p>}
                 {!loading && results.map((product) => (
                   <Link key={product.id} href={`/products/${product.slug || product.id}`} onClick={() => setOpen(false)} className='flex items-center gap-3 p-3 hover:bg-gray-50 border-b last:border-0'>
@@ -124,31 +125,31 @@ const Navbar = ({ settings }) => {
           </div>
         )}
 
-        <div className='ml-auto flex items-center gap-3 md:gap-5'>
+        <div className='ml-auto flex items-center gap-5 md:gap-7'>
           {header.showSearch !== false && (
             <button
-              className='sm:hidden p-2'
+              className='sm:hidden p-2 text-gray-800'
               aria-label='Search'
               onClick={() => router.push('/products')}
             >
               <FiSearch size={22} />
             </button>
           )}
-          <Link href='/wishlist' className='relative hidden sm:block' aria-label='Wishlist'>
-            <FiHeart size={23} />
+          <Link href='/wishlist' className='relative hidden sm:flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] transition-colors' aria-label='Wishlist'>
+            <FiHeart size={24} className='stroke-[1.8]' />
             <CountBadge count={wishlistCount} />
           </Link>
-          <button onClick={openCart} className='relative' aria-label='Shopping cart'>
-            <FiShoppingCart size={24} />
+          <button onClick={openCart} className='relative flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] transition-colors cursor-pointer' aria-label='Shopping cart'>
+            <FiShoppingCart size={24} className='stroke-[1.8]' />
             <CountBadge count={cartCount} />
           </button>
           <Link
             href={mounted && currentUser ? '/user/profile' : '/login'}
-            className='relative p-1 text-gray-800 hover:text-[var(--color-primary)] transition-colors'
+            className='w-10 h-10 rounded-full border border-gray-300 hover:border-gray-900 flex items-center justify-center text-gray-700 hover:text-black transition-all'
             aria-label='Account'
-            title={mounted && currentUser ? `Profile: ${currentUser.name}` : 'Account'}
+            title={mounted && currentUser ? `Profile: ${currentUser.name}` : 'Sign In / Profile'}
           >
-            <FiUser size={24} />
+            <FiUser size={20} className='stroke-[1.8]' />
           </Link>
         </div>
       </div>
@@ -157,7 +158,12 @@ const Navbar = ({ settings }) => {
 };
 
 const CountBadge = ({ count }) => (
-  <span className='absolute -top-2 -right-2 text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center' style={{ backgroundColor: 'var(--color-primary)', color: '#fff' }}>{count}</span>
+  <span
+    className='absolute -top-1.5 -right-2 text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center text-white select-none'
+    style={{ backgroundColor: 'var(--color-button, #eb6e1b)' }}
+  >
+    {count}
+  </span>
 );
 
 export default Navbar;
